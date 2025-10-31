@@ -1,4 +1,4 @@
-package com.muindi.stephen.mobiledeveloperpractical.ui.fragments.splash
+package com.muindi.stephen.mobiledeveloperpractical.ui.fragments.main
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,25 +6,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.muindi.stephen.mobiledeveloperpractical.R
-import com.muindi.stephen.mobiledeveloperpractical.databinding.FragmentSplashBinding
+import com.muindi.stephen.mobiledeveloperpractical.databinding.FragmentVitalsFormBinding
 
 
-class SplashFragment : Fragment() {
+class VitalsFormFragment : Fragment() {
 
-    private lateinit var binding: FragmentSplashBinding
+    private lateinit var binding: FragmentVitalsFormBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {  }
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentSplashBinding.inflate(
-            inflater, container, false
-        )
+        binding = FragmentVitalsFormBinding.inflate(inflater, container, false)
         return binding.root
     }
 }
