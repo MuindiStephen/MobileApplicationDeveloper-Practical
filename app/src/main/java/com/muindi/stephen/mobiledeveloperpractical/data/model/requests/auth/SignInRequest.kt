@@ -1,4 +1,4 @@
-package com.muindi.stephen.mobiledeveloperpractical.data.model.requests
+package com.muindi.stephen.mobiledeveloperpractical.data.model.requests.auth
 
 import com.google.gson.annotations.SerializedName
 

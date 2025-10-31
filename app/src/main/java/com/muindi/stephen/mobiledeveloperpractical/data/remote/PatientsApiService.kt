@@ -1,8 +1,8 @@
 package com.muindi.stephen.mobiledeveloperpractical.data.remote
 
-import com.muindi.stephen.mobiledeveloperpractical.data.model.requests.SignUpRequest
-import com.muindi.stephen.mobiledeveloperpractical.data.dto.responses.SignUpApiGeneralResponse
-import com.muindi.stephen.mobiledeveloperpractical.data.dto.responses.SignUpData
+import com.muindi.stephen.mobiledeveloperpractical.data.model.requests.auth.SignUpRequest
+import com.muindi.stephen.mobiledeveloperpractical.data.dto.responses.auth.SignUpApiGeneralResponse
+import com.muindi.stephen.mobiledeveloperpractical.data.dto.responses.auth.SignUpData
 import retrofit2.http.Body
 import retrofit2.http.POST
 

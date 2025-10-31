@@ -1,4 +1,4 @@
-package com.muindi.stephen.mobiledeveloperpractical.data.dto.responses
+package com.muindi.stephen.mobiledeveloperpractical.data.dto.responses.auth
 
 data class SignInData(
     val id: Int,
