@@ -1,5 +1,7 @@
 package com.muindi.stephen.mobiledeveloperpractical.utils
 
+import androidx.fragment.app.Fragment
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okhttp3.ResponseBody
@@ -55,4 +57,9 @@ suspend fun <T> apiRequestByResource(api: suspend () -> T): ResourceNetwork<T> {
             }
         }
     }
+}
+
+fun Fragment.displaySnackBar(text: String) {
+    Snackbar.make(requireView(), text, Snackbar.LENGTH_SHORT)
+        .show()
 }
