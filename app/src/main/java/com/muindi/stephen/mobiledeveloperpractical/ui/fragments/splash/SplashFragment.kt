@@ -7,8 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.muindi.stephen.mobiledeveloperpractical.R
 import com.muindi.stephen.mobiledeveloperpractical.databinding.FragmentSplashBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class SplashFragment : Fragment() {
 
     private lateinit var binding: FragmentSplashBinding
