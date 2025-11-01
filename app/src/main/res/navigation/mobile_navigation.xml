@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/splashFragment">
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.muindi.stephen.mobiledeveloperpractical.ui.fragments.splash.SplashFragment"
+        android:label="fragment_splash"
+        tools:layout="@layout/fragment_splash" >
+        <action
+            android:id="@+id/action_splashFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.muindi.stephen.mobiledeveloperpractical.ui.fragments.auth.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_patientRegistrationFragment"
+            app:destination="@id/patientRegistrationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.muindi.stephen.mobiledeveloperpractical.ui.fragments.auth.SignUpFragment"
+        android:label="fragment_sign_up"
+        tools:layout="@layout/fragment_sign_up" >
+        <action
+            android:id="@+id/action_signUpFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/patientRegistrationFragment"
+        android:name="com.muindi.stephen.mobiledeveloperpractical.ui.fragments.main.PatientRegistrationFragment"
+        android:label="fragment_patient_registration"
+        tools:layout="@layout/fragment_patient_registration" >
+        <action
+            android:id="@+id/action_patientRegistrationFragment_to_vitalsFormFragment"
+            app:destination="@id/vitalsFormFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/vitalsFormFragment"
+        android:name="com.muindi.stephen.mobiledeveloperpractical.ui.fragments.main.VitalsFormFragment"
+        android:label="fragment_vitals_form"
+        tools:layout="@layout/fragment_vitals_form" >
+        <action
+            android:id="@+id/action_vitalsFormFragment_to_overweightAssessmentFragment"
+            app:destination="@id/overweightAssessmentFragment" />
+        <action
+            android:id="@+id/action_vitalsFormFragment_to_generalAssessmentFragment"
+            app:destination="@id/generalAssessmentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/overweightAssessmentFragment"
+        android:name="com.muindi.stephen.mobiledeveloperpractical.ui.fragments.main.OverweightAssessmentFragment"
+        android:label="fragment_overweight_assessment"
+        tools:layout="@layout/fragment_overweight_assessment" >
+        <action
+            android:id="@+id/action_overweightAssessmentFragment_to_patientListingFragment"
+            app:destination="@id/patientListingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/generalAssessmentFragment"
+        android:name="com.muindi.stephen.mobiledeveloperpractical.ui.fragments.main.GeneralAssessmentFragment"
+        android:label="fragment_general_assessment"
+        tools:layout="@layout/fragment_general_assessment" >
+        <action
+            android:id="@+id/action_generalAssessmentFragment_to_patientListingFragment"
+            app:destination="@id/patientListingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/patientListingFragment"
+        android:name="com.muindi.stephen.mobiledeveloperpractical.ui.fragments.main.PatientListingFragment"
+        android:label="fragment_patient_listing"
+        tools:layout="@layout/fragment_patient_listing" >
+        <action
+            android:id="@+id/action_patientListingFragment_to_patientRegistrationFragment"
+            app:destination="@id/patientRegistrationFragment" />
+    </fragment>
+</navigation>
