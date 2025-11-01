@@ -12,6 +12,7 @@ import com.muindi.stephen.mobiledeveloperpractical.data.model.requests.patients.
 import com.muindi.stephen.mobiledeveloperpractical.data.model.requests.patients.RegisteredPatientsResponse
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.POST
 
 interface PatientsApiService {
@@ -28,22 +29,27 @@ interface PatientsApiService {
 
     @POST("patients/register")
     suspend fun registerNewPatient(
+        @Header("Authorization") accessToken: String,
         @Body patientRegistrationRequest: PatientRegistrationRequest
     ) : PatientRegistrationResponse
 
     @GET("patients/list")
-    suspend fun getAllRegisteredPatients() : RegisteredPatientsResponse
+    suspend fun getAllRegisteredPatients(
+        @Header("Authorization") accessToken: String,
+    ) : RegisteredPatientsResponse
 
     @GET("patients/show/{id}")
-    suspend fun getSpecificPatientInformation() : RegisterPatientData
+    suspend fun getSpecificPatientInformation(
+        @Header("Authorization") accessToken: String,
+    ) : RegisterPatientData
 
     @POST("vitals/add")
-    suspend fun addPatientVitals()
+    suspend fun addPatientVitals(@Header("Authorization") accessToken: String,)
 
     @GET("patients/list")
-    suspend fun getAllVisitsForParticularDay()
+    suspend fun getAllVisitsForParticularDay(@Header("Authorization") accessToken: String,)
 
     @POST("visits/add")
-    suspend fun createPatientVisit()
+    suspend fun createPatientVisit(@Header("Authorization") accessToken: String,)
 
 }
