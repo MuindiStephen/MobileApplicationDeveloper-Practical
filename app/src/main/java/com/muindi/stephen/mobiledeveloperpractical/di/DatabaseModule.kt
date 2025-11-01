@@ -3,6 +3,7 @@ package com.muindi.stephen.mobiledeveloperpractical.di
 import android.app.Application
 import androidx.room.Room
 import com.muindi.stephen.mobiledeveloperpractical.data.local.room.AppLocalDatabase
+import com.muindi.stephen.mobiledeveloperpractical.data.local.room.dao.PatientRegistrationDao
 
 import dagger.Module
 import dagger.Provides
@@ -23,8 +24,13 @@ object DatabaseModule {
         return Room.databaseBuilder(context, AppLocalDatabase::class.java, "patients.db")
             .allowMainThreadQueries()  // without blocking the main thread
             .fallbackToDestructiveMigration() //  Want database to not be cleared when upgrading versions from 1_2
-            // .addMigrations()
             .build()
+    }
+
+    @Provides
+    @Singleton
+    fun providePatientRegistrationDao(appLocalDatabase: AppLocalDatabase): PatientRegistrationDao {
+        return appLocalDatabase.patientRegistrationDao()
     }
 
 }

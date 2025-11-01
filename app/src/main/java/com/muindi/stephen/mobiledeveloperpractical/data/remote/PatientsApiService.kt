@@ -1,9 +1,15 @@
 package com.muindi.stephen.mobiledeveloperpractical.data.remote
 
+import com.muindi.stephen.mobiledeveloperpractical.data.dto.responses.auth.SignInData
 import com.muindi.stephen.mobiledeveloperpractical.data.model.requests.auth.SignUpRequest
 import com.muindi.stephen.mobiledeveloperpractical.data.dto.responses.auth.SignUpApiGeneralResponse
 import com.muindi.stephen.mobiledeveloperpractical.data.dto.responses.auth.SignUpData
+import com.muindi.stephen.mobiledeveloperpractical.data.dto.responses.patients.PatientRegistrationResponse
+import com.muindi.stephen.mobiledeveloperpractical.data.model.requests.patients.PatientRegistrationRequest
+import com.muindi.stephen.mobiledeveloperpractical.data.model.requests.patients.RegisterPatientData
+import com.muindi.stephen.mobiledeveloperpractical.data.model.requests.patients.RegisteredPatientsResponse
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface PatientsApiService {
@@ -13,39 +19,29 @@ interface PatientsApiService {
         @Body signUpRequest: SignUpRequest
     ) : SignUpApiGeneralResponse<SignUpData>
 
-    @POST(REGISTER_END_POINT)
-    suspend fun registerUserWithEmail(
-        @Body emailSignUpRequest: EmailSignUpRequest
-    ) : EmailSignUpResponse
+    @POST("user/login")
+    suspend fun signInUser(
+        @Body signInRequest: SignUpRequest
+    ) : SignUpApiGeneralResponse<SignInData>
 
-    @POST(REGISTER_END_POINT)
-    suspend fun registerUserWithEmail(
-        @Body emailSignUpRequest: EmailSignUpRequest
-    ) : EmailSignUpResponse
+    @POST("patients/register")
+    suspend fun registerNewPatient(
+        @Body patientRegistrationRequest: PatientRegistrationRequest
+    ) : PatientRegistrationResponse
 
-    @POST(REGISTER_END_POINT)
-    suspend fun registerUserWithEmail(
-        @Body emailSignUpRequest: EmailSignUpRequest
-    ) : EmailSignUpResponse
+    @GET("patients/list")
+    suspend fun getAllRegisteredPatients() : RegisteredPatientsResponse
 
-    @POST(REGISTER_END_POINT)
-    suspend fun registerUserWithEmail(
-        @Body emailSignUpRequest: EmailSignUpRequest
-    ) : EmailSignUpResponse
+    @GET("patients/show/{id}")
+    suspend fun getSpecificPatientInformation() : RegisterPatientData
 
-    @POST(REGISTER_END_POINT)
-    suspend fun registerUserWithEmail(
-        @Body emailSignUpRequest: EmailSignUpRequest
-    ) : EmailSignUpResponse
+    @POST("vitals/add")
+    suspend fun addPatientVitals()
 
-    @POST(REGISTER_END_POINT)
-    suspend fun registerUserWithEmail(
-        @Body emailSignUpRequest: EmailSignUpRequest
-    ) : EmailSignUpResponse
+    @GET("patients/list")
+    suspend fun getAllVisitsForParticularDay()
 
-    @POST(REGISTER_END_POINT)
-    suspend fun registerUserWithEmail(
-        @Body emailSignUpRequest: EmailSignUpRequest
-    ) : EmailSignUpResponse
+    @POST("visits/add")
+    suspend fun createPatientVisit()
 
 }
