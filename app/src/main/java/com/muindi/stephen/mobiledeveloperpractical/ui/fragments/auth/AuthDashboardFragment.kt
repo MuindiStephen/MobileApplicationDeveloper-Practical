@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.muindi.stephen.mobiledeveloperpractical.R
 import com.muindi.stephen.mobiledeveloperpractical.databinding.FragmentAuthDashboardBinding
+import com.muindi.stephen.mobiledeveloperpractical.utils.PreferencesHelper
 
 
 class AuthDashboardFragment : Fragment() {
@@ -28,11 +29,15 @@ class AuthDashboardFragment : Fragment() {
 
         binding.apply {
             buttonSignIn.setOnClickListener {
+                PreferencesHelper(requireActivity()).setIfToShowOnAuthDashboard(requireActivity(), false)
+
                 findNavController().navigate(
                     R.id.action_authDashboardFragment_to_loginFragment
                 )
             }
             buttonSignUp.setOnClickListener {
+                PreferencesHelper(requireActivity()).setIfToShowOnAuthDashboard(requireActivity(), false)
+
                 findNavController().navigate(
                     R.id.action_authDashboardFragment_to_signUpFragment
                 )

@@ -15,6 +15,7 @@ import com.muindi.stephen.mobiledeveloperpractical.R
 import com.muindi.stephen.mobiledeveloperpractical.databinding.FragmentSignUpBinding
 import com.muindi.stephen.mobiledeveloperpractical.utils.ResourceNetwork
 import com.muindi.stephen.mobiledeveloperpractical.utils.displaySnackBar
+import com.muindi.stephen.mobiledeveloperpractical.utils.isValidEmail
 import com.muindi.stephen.mobiledeveloperpractical.viewmodel.MainViewModel
 import kotlinx.coroutines.launch
 import org.json.JSONObject
@@ -41,7 +42,18 @@ class SignUpFragment : Fragment() {
         binding = FragmentSignUpBinding.inflate(
             inflater, container, false
         )
+
+        initBinding()
+
         return binding.root
+    }
+
+    private fun initBinding() {
+        binding.signInAlreadyAccText.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_signUpFragment_to_loginFragment
+            )
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -123,6 +135,11 @@ class SignUpFragment : Fragment() {
         }
         if (binding.inputLastName.text.isNullOrEmpty()) {
             binding.enterLastName.error = "**required"
+            valid = false
+        }
+
+        if (!isValidEmail(binding.inputEmail.text.toString().trim())) {
+            binding.enterEmail.error = "Email is invalid"
             valid = false
         }
 

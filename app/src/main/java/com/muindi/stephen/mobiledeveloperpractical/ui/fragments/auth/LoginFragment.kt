@@ -11,8 +11,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.muindi.stephen.mobiledeveloperpractical.R
 import com.muindi.stephen.mobiledeveloperpractical.databinding.FragmentLoginBinding
+import com.muindi.stephen.mobiledeveloperpractical.utils.PreferencesHelper
 import com.muindi.stephen.mobiledeveloperpractical.utils.ResourceNetwork
 import com.muindi.stephen.mobiledeveloperpractical.utils.displaySnackBar
+import com.muindi.stephen.mobiledeveloperpractical.utils.isValidEmail
+import com.muindi.stephen.mobiledeveloperpractical.utils.saveToken
 import com.muindi.stephen.mobiledeveloperpractical.viewmodel.MainViewModel
 import kotlinx.coroutines.launch
 import org.json.JSONObject
@@ -37,7 +40,18 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentLoginBinding.inflate(inflater, container, false)
+
+        setUpBinding()
+
         return binding.root
+    }
+
+    private fun setUpBinding() {
+        binding.textViewDontHaveAcc.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_loginFragment_to_signUpFragment
+            )
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -87,14 +101,19 @@ class LoginFragment : Fragment() {
                         val apiResponse = state.value
                         val message = apiResponse.message ?: "Login successful"
 
-                        //then save the access token
-
+                        //Then save the access token
+                        val accessToken = apiResponse.data?.access_token
+                        if (!accessToken.isNullOrEmpty()) {
+                            saveToken(context = requireContext(), token = accessToken)
+                        }
 
                         displaySnackBar(message)
 
                         findNavController().navigate(
                             R.id.action_loginFragment_to_patientRegistrationFragment
                         )
+
+                        PreferencesHelper(requireContext()).setIfFirstTimeLogin(requireActivity(),false)
                     }
                 }
             }
@@ -106,14 +125,20 @@ class LoginFragment : Fragment() {
         var valid = true
 
         if (binding.inputLoginEmail.text.isNullOrEmpty()) {
-            binding.inputLoginEmail.error = "**required"
+            binding.enterLoginEmailAddress.error = "**required"
             valid = false
         }
         if (binding.inputLoginPassword.text.isNullOrEmpty()) {
-            binding.inputLoginPassword.error = "**required"
+            binding.enterLoginPassword.error = "**required"
+            valid = false
+        }
+
+        if (!isValidEmail(binding.inputLoginEmail.text.toString().trim())) {
+            binding.enterLoginEmailAddress.error = "Email is invalid"
             valid = false
         }
 
         return valid
     }
+
 }
