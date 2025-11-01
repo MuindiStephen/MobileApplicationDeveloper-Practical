@@ -48,6 +48,8 @@ class SignUpFragment : Fragment() {
         return binding.root
     }
 
+
+
     private fun initBinding() {
         binding.signInAlreadyAccText.setOnClickListener {
             findNavController().navigate(

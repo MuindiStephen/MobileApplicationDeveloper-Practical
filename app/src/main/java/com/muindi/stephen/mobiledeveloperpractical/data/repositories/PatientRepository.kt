@@ -16,17 +16,6 @@ class PatientRepository @Inject constructor(
 
 
     /**
-     * Registering a patient
-     */
-    suspend fun registerPatientRemote(patientRegistrationRequest: PatientRegistrationRequest ) = apiRequestByResource {
-        apiService.registerNewPatient(patientRegistrationRequest)
-    }
-
-    suspend fun registerPatientLocally(patientRegistrationRequest: PatientRegistrationRequest) = apiRequestByResource {
-        patientRegistrationDao.insertPatient(patientRegistrationRequest)
-    }
-
-    /**
      * Auth
      */
     suspend fun signUp(signUpRequest: SignUpRequest) = apiRequestByResource {
@@ -36,5 +25,29 @@ class PatientRepository @Inject constructor(
     suspend fun signIn(signInRequest: SignInRequest) = apiRequestByResource {
         apiService.signInUser(signInRequest)
     }
+
+    /**
+     * Patients
+     *
+     */
+
+    // Registering a new patient
+    suspend fun registerNewPatientRemote(accessToken: String, patientRegistrationRequest: PatientRegistrationRequest ) = apiRequestByResource {
+        apiService.registerNewPatient(accessToken = accessToken, patientRegistrationRequest = patientRegistrationRequest)
+    }
+
+    suspend fun registerNewPatientLocally(patientRegistrationRequest: PatientRegistrationRequest) = apiRequestByResource {
+        patientRegistrationDao.insertPatient(patientRegistrationRequest)
+    }
+
+
+
+    /**
+     * Vitals
+     */
+
+    /**
+     * Visits
+     */
 
 }
