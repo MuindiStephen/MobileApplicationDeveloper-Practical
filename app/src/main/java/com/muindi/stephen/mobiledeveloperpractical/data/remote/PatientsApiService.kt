@@ -9,8 +9,8 @@ import com.muindi.stephen.mobiledeveloperpractical.data.dto.responses.patients.P
 import com.muindi.stephen.mobiledeveloperpractical.data.dto.responses.visits.VisitsResponse
 import com.muindi.stephen.mobiledeveloperpractical.data.model.requests.auth.SignInRequest
 import com.muindi.stephen.mobiledeveloperpractical.data.model.requests.patients.PatientRegistrationRequest
-import com.muindi.stephen.mobiledeveloperpractical.data.model.requests.patients.RegisterPatientData
-import com.muindi.stephen.mobiledeveloperpractical.data.model.requests.patients.RegisteredPatientsResponse
+import com.muindi.stephen.mobiledeveloperpractical.data.dto.responses.patients.RegisterPatientData
+import com.muindi.stephen.mobiledeveloperpractical.data.dto.responses.patients.RegisteredPatientsResponse
 import com.muindi.stephen.mobiledeveloperpractical.data.dto.responses.vitals.AddVitalResponse
 import com.muindi.stephen.mobiledeveloperpractical.data.model.requests.visits.VisitsGeneralAssessmentRequest
 import com.muindi.stephen.mobiledeveloperpractical.data.model.requests.visits.VisitsOverweightAssessmentRequest
@@ -44,18 +44,20 @@ interface PatientsApiService {
         @Body patientRegistrationRequest: PatientRegistrationRequest
     ) : PatientRegistrationResponse
 
-    @GET("patients/list")
+    /**
+     * display a list of patients
+     */
+    @GET("patients/view")
     suspend fun getAllRegisteredPatients(
         @Header("Authorization") accessToken: String,
     ) : RegisteredPatientsResponse
+
 
     @GET("patients/show/{id}")
     suspend fun getSpecificPatientInformation(
         @Header("Authorization") accessToken: String,
     ) : RegisterPatientData
 
-    @GET("patients/list")
-    suspend fun getAllVisitsForParticularDate(@Header("Authorization") accessToken: String,)
 
     /**
      * Vitals

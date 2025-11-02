@@ -107,8 +107,8 @@ class VitalsFormFragment : Fragment() {
                         binding.progressBar.isVisible = false
 
                         val apiResponse = state.value
-                        val msg = apiResponse.data?.message ?: "Patient registration successful"
-                        val status = apiResponse.success
+                        val msg = apiResponse.data?.message ?: "Vital added successful"
+                        val status = apiResponse.data.slug
 
                         if (msg == "Vital Added Successfully") {
                             displaySnackBar(msg)
@@ -127,7 +127,7 @@ class VitalsFormFragment : Fragment() {
                                 )
                             }
 
-                        } else if (!status) {
+                        } else if (status != 0) {
                             displaySnackBar(msg ?: "Failed to add vital")
                         }
                     }

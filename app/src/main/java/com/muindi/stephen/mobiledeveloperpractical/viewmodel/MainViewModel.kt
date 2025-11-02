@@ -1,5 +1,6 @@
 package com.muindi.stephen.mobiledeveloperpractical.viewmodel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.muindi.stephen.mobiledeveloperpractical.data.dto.responses.auth.SignInApiGeneralResponse
@@ -7,6 +8,7 @@ import com.muindi.stephen.mobiledeveloperpractical.data.dto.responses.auth.SignI
 import com.muindi.stephen.mobiledeveloperpractical.data.dto.responses.auth.SignUpApiGeneralResponse
 import com.muindi.stephen.mobiledeveloperpractical.data.dto.responses.auth.SignUpData
 import com.muindi.stephen.mobiledeveloperpractical.data.dto.responses.patients.PatientRegistrationResponse
+import com.muindi.stephen.mobiledeveloperpractical.data.dto.responses.patients.RegisteredPatientsResponse
 import com.muindi.stephen.mobiledeveloperpractical.data.dto.responses.visits.VisitsResponse
 import com.muindi.stephen.mobiledeveloperpractical.data.dto.responses.vitals.AddVitalResponse
 import com.muindi.stephen.mobiledeveloperpractical.data.model.requests.auth.SignInRequest
@@ -192,5 +194,9 @@ class MainViewModel @Inject constructor(
                 on_drugs = on_drugs
             )
         )
+    }
+
+    fun fetchAllPatientListing(accessToken: String) : LiveData<RegisteredPatientsResponse> {
+        return repository.fetchAllPatientListing(accessToken = accessToken)
     }
 }

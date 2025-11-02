@@ -1,6 +1,6 @@
 package com.muindi.stephen.mobiledeveloperpractical.data.dto.responses.patients
 
-data class DataX(
+data class RegisterPatientData(
     val created_at: String,
     val dob: String,
     val firstname: String,
@@ -9,5 +9,6 @@ data class DataX(
     val lastname: String,
     val reg_date: String,
     val unique: String,
-    val updated_at: String
+    val updated_at: String,
+    val user_id: Int
 )

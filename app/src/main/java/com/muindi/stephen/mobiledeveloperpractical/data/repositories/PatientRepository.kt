@@ -1,5 +1,8 @@
 package com.muindi.stephen.mobiledeveloperpractical.data.repositories
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.liveData
+import com.muindi.stephen.mobiledeveloperpractical.data.dto.responses.patients.RegisteredPatientsResponse
 import com.muindi.stephen.mobiledeveloperpractical.data.local.room.AppLocalDatabase
 import com.muindi.stephen.mobiledeveloperpractical.data.model.requests.auth.SignInRequest
 import com.muindi.stephen.mobiledeveloperpractical.data.model.requests.auth.SignUpRequest
@@ -9,6 +12,7 @@ import com.muindi.stephen.mobiledeveloperpractical.data.model.requests.visits.Vi
 import com.muindi.stephen.mobiledeveloperpractical.data.model.requests.vitals.AddVitalRequest
 import com.muindi.stephen.mobiledeveloperpractical.data.remote.PatientsApiService
 import com.muindi.stephen.mobiledeveloperpractical.utils.apiRequestByResource
+import timber.log.Timber
 import javax.inject.Inject
 
 class PatientRepository @Inject constructor(
@@ -80,4 +84,17 @@ class PatientRepository @Inject constructor(
         visitsOverweightAssessmentInformationDao.insertOverweightAssessmentInformation(visitsOverweightAssessmentRequest)
     }
 
+    /**
+     * Patients listing
+     */
+
+    fun fetchAllPatientListing(accessToken: String): LiveData<RegisteredPatientsResponse> = liveData {
+        try {
+            Timber.d("Success: Pulled patients")
+            val response = apiService.getAllRegisteredPatients(accessToken = accessToken)
+            emit(response) // Emit the response as LiveData
+        } catch (e: Exception) {
+            Timber.d("::Error:: Could not pull patients :WHY: ${e.message}")
+        }
+    }
 }

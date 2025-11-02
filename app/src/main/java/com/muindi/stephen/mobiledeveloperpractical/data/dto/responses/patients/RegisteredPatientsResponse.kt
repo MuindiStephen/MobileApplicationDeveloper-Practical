@@ -1,8 +1,8 @@
 package com.muindi.stephen.mobiledeveloperpractical.data.dto.responses.patients
 
-data class ViewPatientResponse(
+data class RegisteredPatientsResponse(
     val code: Int,
-    val `data`: List<DataXX>,
+    val `data`: List<RegisterPatientData>,
     val message: String,
     val success: Boolean
 )
