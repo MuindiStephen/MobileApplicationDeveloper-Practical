@@ -36,10 +36,13 @@ class MainViewModel @Inject constructor(
 
 
     //user signup
-    private val _signUpState = MutableStateFlow<ResourceNetwork<SignUpApiGeneralResponse<SignUpData>>>(ResourceNetwork.Loading)
-    val signUpState: StateFlow<ResourceNetwork<SignUpApiGeneralResponse<SignUpData>>> = _signUpState
+    private val _signUpState = MutableStateFlow<ResourceNetwork<SignUpApiGeneralResponse<SignUpData>>?>(null)
+    val signUpState: StateFlow<ResourceNetwork<SignUpApiGeneralResponse<SignUpData>>?> = _signUpState
 
     fun signUpUser(email: String, firstname: String, lastname: String, password: String) = viewModelScope.launch {
+
+        _signUpState.value = ResourceNetwork.Loading
+
         _signUpState.value = repository.signUp(SignUpRequest(
             email = email,
             firstName = firstname,
@@ -49,10 +52,12 @@ class MainViewModel @Inject constructor(
     }
 
     //user signin
-    private val _signInState = MutableStateFlow<ResourceNetwork<SignInApiGeneralResponse<SignInData>>>(ResourceNetwork.Loading)
-    val signInState: StateFlow<ResourceNetwork<SignInApiGeneralResponse<SignInData>>> = _signInState
+    private val _signInState = MutableStateFlow<ResourceNetwork<SignInApiGeneralResponse<SignInData>>?>(null)
+    val signInState: StateFlow<ResourceNetwork<SignInApiGeneralResponse<SignInData>>?> = _signInState
 
     fun signInUser(email: String, password: String) = viewModelScope.launch {
+        _signInState.value = ResourceNetwork.Loading
+
         _signInState.value = repository.signIn(SignInRequest(
             email = email,
             password = password)
@@ -134,7 +139,8 @@ class MainViewModel @Inject constructor(
 
 
     private var _addNewGeneralAssessmentRemoteState = MutableStateFlow<ResourceNetwork<VisitsResponse>?>(null)
-    val addNewGeneralAssessmentRemoteState: StateFlow<ResourceNetwork<VisitsResponse>?> get() = _addNewGeneralAssessmentRemoteState.asStateFlow()
+    val addNewGeneralAssessmentRemoteState: StateFlow<ResourceNetwork<VisitsResponse>?>
+        get() = _addNewGeneralAssessmentRemoteState.asStateFlow()
 
     fun addANewGeneralAssessmentInfoRemotely(
         accessToken: String,
@@ -170,7 +176,8 @@ class MainViewModel @Inject constructor(
 
 
     private var _addNewOverweightAssessmentRemoteState = MutableStateFlow<ResourceNetwork<VisitsResponse>?>(null)
-    val addNewOverweightAssessmentRemoteState: StateFlow<ResourceNetwork<VisitsResponse>?> get() = _addNewOverweightAssessmentRemoteState.asStateFlow()
+    val addNewOverweightAssessmentRemoteState: StateFlow<ResourceNetwork<VisitsResponse>?>
+        get() = _addNewOverweightAssessmentRemoteState.asStateFlow()
 
     fun addANewOverweightAssessmentInfoRemotely(
         accessToken: String,

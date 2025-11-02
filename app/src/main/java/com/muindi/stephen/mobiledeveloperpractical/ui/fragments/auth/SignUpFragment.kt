@@ -68,6 +68,7 @@ class SignUpFragment : Fragment() {
 
         binding.buttonSignUp.setOnClickListener {
             if (validatedInputs()) {
+                binding.progressBar.visibility = View.VISIBLE
                 viewModel.signUpUser(
                     email = binding.inputEmail.text.toString().trim(),
                     password = binding.inputPassword.text.toString().trim(),
@@ -103,7 +104,6 @@ class SignUpFragment : Fragment() {
                     ResourceNetwork.Loading -> {
                         Timber.d("Loading request")
                         binding.progressBar.visibility = View.VISIBLE
-
                     }
 
 
@@ -115,6 +115,10 @@ class SignUpFragment : Fragment() {
 
                         displaySnackBar(signupMsg)
                         findNavController().navigate(R.id.action_signUpFragment_to_loginFragment)
+                    }
+
+                    null -> {
+                        binding.progressBar.visibility = View.GONE
                     }
                 }
             }

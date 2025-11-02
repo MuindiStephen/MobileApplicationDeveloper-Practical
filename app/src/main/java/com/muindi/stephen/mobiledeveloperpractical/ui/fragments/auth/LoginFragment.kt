@@ -64,6 +64,7 @@ class LoginFragment : Fragment() {
 
         binding.buttonSignIn.setOnClickListener {
             if (validatedInputs()) {
+                binding.progressBar.visibility = View.VISIBLE
                 viewModel.signInUser(
                     email = binding.inputLoginEmail.text.toString().trim(),
                     password = binding.inputLoginPassword.text.toString().trim()
@@ -114,6 +115,10 @@ class LoginFragment : Fragment() {
                         findNavController().navigate(
                             R.id.action_loginFragment_to_patientRegistrationFragment
                         )
+                    }
+
+                    null -> {
+                        binding.progressBar.visibility = View.GONE
                     }
                 }
             }

@@ -115,7 +115,7 @@ class VitalsFormFragment : Fragment() {
 
                             //navigate either to general or overweight screens
                             //BMI comparison with 25
-                            val bmi = binding.inputBMI.text.toString().toDouble()
+                            val bmi = binding.inputBMI.text.toString().toDoubleOrNull() ?: 0.0
 
                             if (bmi <= 25.0) {
                                 findNavController().navigate(
