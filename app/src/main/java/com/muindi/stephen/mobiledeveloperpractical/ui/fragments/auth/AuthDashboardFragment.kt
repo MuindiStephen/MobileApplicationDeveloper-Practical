@@ -9,8 +9,9 @@ import androidx.navigation.fragment.findNavController
 import com.muindi.stephen.mobiledeveloperpractical.R
 import com.muindi.stephen.mobiledeveloperpractical.databinding.FragmentAuthDashboardBinding
 import com.muindi.stephen.mobiledeveloperpractical.utils.PreferencesHelper
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class AuthDashboardFragment : Fragment() {
     private lateinit var binding: FragmentAuthDashboardBinding
 

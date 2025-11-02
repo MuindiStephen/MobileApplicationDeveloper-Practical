@@ -8,11 +8,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.muindi.stephen.mobiledeveloperpractical.adapter.PatientListingAdapter
 import com.muindi.stephen.mobiledeveloperpractical.data.dto.responses.patients.RegisterPatientData
 import com.muindi.stephen.mobiledeveloperpractical.databinding.FragmentPatientListingBinding
-import com.muindi.stephen.mobiledeveloperpractical.databinding.FragmentVitalsFormBinding
 import com.muindi.stephen.mobiledeveloperpractical.utils.displaySnackBar
 import com.muindi.stephen.mobiledeveloperpractical.utils.getToken
 import com.muindi.stephen.mobiledeveloperpractical.viewmodel.MainViewModel

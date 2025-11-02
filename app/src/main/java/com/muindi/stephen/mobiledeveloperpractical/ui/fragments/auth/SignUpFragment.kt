@@ -17,6 +17,7 @@ import com.muindi.stephen.mobiledeveloperpractical.utils.ResourceNetwork
 import com.muindi.stephen.mobiledeveloperpractical.utils.displaySnackBar
 import com.muindi.stephen.mobiledeveloperpractical.utils.isValidEmail
 import com.muindi.stephen.mobiledeveloperpractical.viewmodel.MainViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import org.json.JSONObject
 import timber.log.Timber
@@ -24,6 +25,7 @@ import timber.log.Timber
 /**
  * Sign up user screen
  */
+@AndroidEntryPoint
 class SignUpFragment : Fragment() {
 
     private lateinit var binding: FragmentSignUpBinding

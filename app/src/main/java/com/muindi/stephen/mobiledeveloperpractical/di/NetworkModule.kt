@@ -55,7 +55,7 @@ object NetworkModule {
         converter: Converter.Factory
     ): Retrofit {
         return Retrofit.Builder()
-           // .baseUrl(Constants.getStringBaseUrlDevelopment())
+            .baseUrl("https://patientvisitapis.intellisoftkenya.com/api/")
             .client(okHttpClient)
             .addConverterFactory(converter)
             .build()
