@@ -175,4 +175,18 @@
         app:layout_constraintEnd_toEndOf="@+id/spinneGender"
         app:layout_constraintTop_toBottomOf="@+id/spinneGender" />
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:indeterminateTint="@color/main"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonClose" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

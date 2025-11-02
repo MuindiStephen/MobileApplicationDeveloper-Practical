@@ -4,6 +4,7 @@ import com.muindi.stephen.mobiledeveloperpractical.data.local.room.AppLocalDatab
 import com.muindi.stephen.mobiledeveloperpractical.data.model.requests.auth.SignInRequest
 import com.muindi.stephen.mobiledeveloperpractical.data.model.requests.auth.SignUpRequest
 import com.muindi.stephen.mobiledeveloperpractical.data.model.requests.patients.PatientRegistrationRequest
+import com.muindi.stephen.mobiledeveloperpractical.data.model.requests.vitals.AddVitalRequest
 import com.muindi.stephen.mobiledeveloperpractical.data.remote.PatientsApiService
 import com.muindi.stephen.mobiledeveloperpractical.utils.apiRequestByResource
 import javax.inject.Inject
@@ -45,6 +46,13 @@ class PatientRepository @Inject constructor(
     /**
      * Vitals
      */
+    suspend fun addVitalRemotely(accessToken: String, addVitalRequest: AddVitalRequest ) = apiRequestByResource {
+        apiService.addPatientVitals(accessToken = accessToken, vitalRequest = addVitalRequest)
+    }
+
+    suspend fun addVitalLocally(addVitalRequest: AddVitalRequest) = apiRequestByResource {
+        //patientRegistrationDao.insertPatient(patientRegistrationRequest)
+    }
 
     /**
      * Visits

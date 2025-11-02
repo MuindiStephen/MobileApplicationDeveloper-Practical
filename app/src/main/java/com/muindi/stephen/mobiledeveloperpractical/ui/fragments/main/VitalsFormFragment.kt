@@ -7,8 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import com.muindi.stephen.mobiledeveloperpractical.R
 import com.muindi.stephen.mobiledeveloperpractical.databinding.FragmentVitalsFormBinding
+import dagger.hilt.android.AndroidEntryPoint
 
 
+@AndroidEntryPoint
 class VitalsFormFragment : Fragment() {
 
     private lateinit var binding: FragmentVitalsFormBinding

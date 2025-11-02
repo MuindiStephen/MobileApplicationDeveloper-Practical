@@ -10,6 +10,10 @@ import com.muindi.stephen.mobiledeveloperpractical.data.model.requests.auth.Sign
 import com.muindi.stephen.mobiledeveloperpractical.data.model.requests.patients.PatientRegistrationRequest
 import com.muindi.stephen.mobiledeveloperpractical.data.model.requests.patients.RegisterPatientData
 import com.muindi.stephen.mobiledeveloperpractical.data.model.requests.patients.RegisteredPatientsResponse
+import com.muindi.stephen.mobiledeveloperpractical.data.dto.responses.vitals.AddVitalResponse
+import com.muindi.stephen.mobiledeveloperpractical.data.model.requests.visits.VisitsGeneralAssessmentRequest
+import com.muindi.stephen.mobiledeveloperpractical.data.model.requests.visits.VisitsOverweightAssessmentRequest
+import com.muindi.stephen.mobiledeveloperpractical.data.model.requests.vitals.AddVitalRequest
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -17,6 +21,9 @@ import retrofit2.http.POST
 
 interface PatientsApiService {
 
+    /**
+     * User Auth
+     */
     @POST("user/signup")
     suspend fun signUpUser(
         @Body signUpRequest: SignUpRequest
@@ -27,6 +34,9 @@ interface PatientsApiService {
         @Body signInRequest: SignInRequest
     ) : SignInApiGeneralResponse<SignInData>
 
+    /**
+     * Patients
+     */
     @POST("patients/register")
     suspend fun registerNewPatient(
         @Header("Authorization") accessToken: String,
@@ -43,13 +53,31 @@ interface PatientsApiService {
         @Header("Authorization") accessToken: String,
     ) : RegisterPatientData
 
-    @POST("vitals/add")
-    suspend fun addPatientVitals(@Header("Authorization") accessToken: String,)
+    /**
+     * Vitals
+     */
+    @POST("vital/add")
+    suspend fun addPatientVitals(
+        @Header("Authorization") accessToken: String,
+        @Body vitalRequest: AddVitalRequest
+    ): AddVitalResponse
 
     @GET("patients/list")
-    suspend fun getAllVisitsForParticularDay(@Header("Authorization") accessToken: String,)
+    suspend fun getAllVisitsForParticularDate(@Header("Authorization") accessToken: String,)
+
+    /**
+     * Visits
+     */
+    @POST("visits/add")
+    suspend fun addGeneralAssessmentInformation(
+        @Header("Authorization") accessToken: String,
+        @Body visitsGeneralAssessmentRequest: VisitsGeneralAssessmentRequest
+    )
 
     @POST("visits/add")
-    suspend fun createPatientVisit(@Header("Authorization") accessToken: String,)
+    suspend fun addOverweightAssessmentInformation(
+        @Header("Authorization") accessToken: String,
+        @Body visitsOverweightAssessmentRequest: VisitsOverweightAssessmentRequest
+    )
 
 }

@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.muindi.stephen.mobiledeveloperpractical.R
 import com.muindi.stephen.mobiledeveloperpractical.databinding.FragmentGeneralAssessmentBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class GeneralAssessmentFragment : Fragment() {
 
     private lateinit var binding: FragmentGeneralAssessmentBinding

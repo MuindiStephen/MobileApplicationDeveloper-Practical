@@ -74,6 +74,12 @@ fun saveToken(context: Context, token: String) {
     }
 }
 
+fun getToken(context: Context): String? {
+    val sharedPref = context.getSharedPreferences("PatientCareBasePrefs", Context.MODE_PRIVATE)
+    return sharedPref.getString("access_token", null)
+}
+
+
 fun isValidEmail(emailAddress: String): Boolean {
     return Patterns.EMAIL_ADDRESS.matcher(emailAddress).matches()
 }

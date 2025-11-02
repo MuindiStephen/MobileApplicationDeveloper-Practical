@@ -7,8 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.muindi.stephen.mobiledeveloperpractical.R
 import com.muindi.stephen.mobiledeveloperpractical.databinding.FragmentOverweightAssessmentBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class OverweightAssessmentFragment : Fragment() {
 
     private lateinit var binding: FragmentOverweightAssessmentBinding

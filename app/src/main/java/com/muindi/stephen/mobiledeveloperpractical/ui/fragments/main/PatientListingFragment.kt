@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.muindi.stephen.mobiledeveloperpractical.databinding.FragmentPatientListingBinding
+import dagger.hilt.android.AndroidEntryPoint
 
 
+@AndroidEntryPoint
 class PatientListingFragment : Fragment() {
 
     private lateinit var binding: FragmentPatientListingBinding

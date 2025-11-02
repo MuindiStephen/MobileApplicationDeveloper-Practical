@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -15,6 +16,7 @@ import com.muindi.stephen.mobiledeveloperpractical.data.model.requests.patients.
 import com.muindi.stephen.mobiledeveloperpractical.databinding.FragmentPatientRegistrationBinding
 import com.muindi.stephen.mobiledeveloperpractical.utils.ResourceNetwork
 import com.muindi.stephen.mobiledeveloperpractical.utils.displaySnackBar
+import com.muindi.stephen.mobiledeveloperpractical.utils.getToken
 import com.muindi.stephen.mobiledeveloperpractical.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -52,11 +54,13 @@ class PatientRegistrationFragment : Fragment() {
 
         subScribeAddNewPatientRemotelyStateObservables()
 
+        // defined accessToken here
+        val accessToken = getToken(requireContext())
 
         binding.buttonSave.setOnClickListener {
             if (validatedInputs()) {
                 viewModel.addANewPatientRemotely(
-                    accessToken = "",
+                    accessToken = "Bearer $accessToken",
                     unique = binding.inputPatientNumber.text.toString().trim(),
                     reg_date = binding.inputRegDate.text.toString().trim(),
                     firstname = binding.inputFirstName.text.toString().trim(),
@@ -95,14 +99,18 @@ class PatientRegistrationFragment : Fragment() {
             viewModel.addNewPatientRemoteState.collect { state ->
                 when(state) {
                     is ResourceNetwork.Failure -> {
-                        Timber.e("Request failed")
+                        binding.progressBar.isVisible = false
+                        Timber.e("Register Patient: Request failed")
                         val errorMsg = state.errorString ?: "Unexpected error occurred, please try again"
                         displaySnackBar(errorMsg)
                     }
                     ResourceNetwork.Loading -> {
-                        Timber.d("Loading request")
+                        Timber.d("Loading request....")
+                        binding.progressBar.isVisible = true
                     }
                     is ResourceNetwork.Success -> {
+
+                        binding.progressBar.isVisible = false
 
                         val apiResponse = state.value
                         val proceed = apiResponse.data?.proceed
