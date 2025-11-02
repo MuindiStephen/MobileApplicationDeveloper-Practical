@@ -54,6 +54,9 @@ interface PatientsApiService {
         @Header("Authorization") accessToken: String,
     ) : RegisterPatientData
 
+    @GET("patients/list")
+    suspend fun getAllVisitsForParticularDate(@Header("Authorization") accessToken: String,)
+
     /**
      * Vitals
      */
@@ -63,8 +66,6 @@ interface PatientsApiService {
         @Body vitalRequest: AddVitalRequest
     ): AddVitalResponse
 
-    @GET("patients/list")
-    suspend fun getAllVisitsForParticularDate(@Header("Authorization") accessToken: String,)
 
     /**
      * Visits
