@@ -115,6 +115,8 @@ class VitalsFormFragment : Fragment() {
 
                             viewModel.resetVitalState()
 
+                            clearAllInputFields()
+
                             //navigate either to general or overweight screens
                             //BMI comparison with 25
                             val bmi = binding.inputBMI.text.toString().toDoubleOrNull() ?: 0.0
@@ -140,6 +142,14 @@ class VitalsFormFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun clearAllInputFields() {
+        binding.inputPatientName.text?.clear()
+        binding.inputVisitDate.text?.clear()
+        binding.inputHeight.text?.clear()
+        binding.inputWeight.text?.clear()
+        binding.inputBMI.text?.clear()
     }
 
     private fun initBinding() {

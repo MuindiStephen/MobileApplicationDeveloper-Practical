@@ -166,6 +166,8 @@ class GeneralAssessmentFragment : Fragment() {
 
                             viewModel.resetGeneralAssessState()
 
+                            clearAllInputFields()
+
                             findNavController().navigate(
                                 R.id.action_generalAssessmentFragment_to_patientListingFragment
                             )
@@ -180,6 +182,12 @@ class GeneralAssessmentFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun clearAllInputFields() {
+        binding.inputPatientName.text?.clear()
+        binding.inputVisitDate.text?.clear()
+        binding.inputComments.text?.clear()
     }
 
     private fun initRadioGroups() {

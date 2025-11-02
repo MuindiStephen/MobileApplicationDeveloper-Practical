@@ -165,6 +165,8 @@ class OverweightAssessmentFragment : Fragment() {
 
                             viewModel.resetOverWeightAssessState()
 
+                            clearAllInputFields()
+
                             findNavController().navigate(
                                 R.id.action_overweightAssessmentFragment_to_patientListingFragment
                             )
@@ -179,6 +181,12 @@ class OverweightAssessmentFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun clearAllInputFields() {
+        binding.inputPatientName.text?.clear()
+        binding.inputVisitDate.text?.clear()
+        binding.inputComments.text?.clear()
     }
 
     private fun initRadioGroups() {

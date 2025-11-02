@@ -145,6 +145,8 @@ class PatientRegistrationFragment : Fragment() {
                             findNavController().navigate(R.id.action_patientRegistrationFragment_to_vitalsFormFragment)
 
                             viewModel.resetPatientRegistrationState()
+
+                            clearAllInputFields()
                         } else if (proceed == 1) {
                             displaySnackBar(msg ?: "Failed to register patient")
                         }
@@ -156,6 +158,14 @@ class PatientRegistrationFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun clearAllInputFields() {
+        binding.inputPatientNumber.text?.clear()
+        binding.inputRegDate.text?.clear()
+        binding.inputFirstName.text?.clear()
+        binding.inputLastName.text?.clear()
+        binding.inputDOB.text?.clear()
     }
 
     private fun initBinding() {
