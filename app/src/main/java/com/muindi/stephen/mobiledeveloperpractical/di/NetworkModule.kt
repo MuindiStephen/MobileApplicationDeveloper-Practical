@@ -1,6 +1,7 @@
 package com.muindi.stephen.mobiledeveloperpractical.di
 
 
+import com.muindi.stephen.mobiledeveloperpractical.data.remote.PatientsApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -59,5 +60,11 @@ object NetworkModule {
             .client(okHttpClient)
             .addConverterFactory(converter)
             .build()
+    }
+
+    @Provides
+    @Singleton
+    fun providesApiService(@Named("retrofit") retrofit: Retrofit): PatientsApiService {
+        return retrofit.create(PatientsApiService::class.java)
     }
 }

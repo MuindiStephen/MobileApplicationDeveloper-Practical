@@ -99,6 +99,15 @@ class GeneralAssessmentFragment : Fragment() {
     }
 
     private fun initBinding() {
+
+        binding.imageView11.setOnClickListener {
+            findNavController().navigateUp()
+        }
+
+        binding.buttonClose.setOnClickListener {
+            requireActivity().finishAffinity()
+        }
+
         binding.inputVisitDate.setOnFocusChangeListener { v, hasFocus ->
             if (hasFocus) {
                 showDatePickerDialog()

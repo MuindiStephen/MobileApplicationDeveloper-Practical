@@ -133,6 +133,9 @@ class PatientRegistrationFragment : Fragment() {
     }
 
     private fun initBinding() {
+
+        binding.textViewUserName.text = ""
+
         binding.inputRegDate.setOnFocusChangeListener { v, hasFocus ->
             if (hasFocus) {
                 showDatePickerDialog()

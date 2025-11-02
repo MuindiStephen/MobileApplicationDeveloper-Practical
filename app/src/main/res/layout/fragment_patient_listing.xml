@@ -7,12 +7,42 @@
     tools:context=".ui.fragments.main.PatientListingFragment">
 
 
+
+    <LinearLayout
+        android:id="@+id/topbar_linear_layout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/main"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imageView11"
+            android:layout_gravity="center"
+            android:layout_marginStart="32dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow_back" />
+
+        <TextView
+            android:id="@+id/textView55"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="32dp"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:text="Patient Vitals" />
+    </LinearLayout>
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/pickDate"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="36dp"
         android:hint="Select date"
         android:layout_marginStart="@dimen/_16dp"
         android:layout_marginEnd="@dimen/_16dp"
@@ -24,7 +54,7 @@
         app:endIconMode="clear_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/topbar_linear_layout">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/inputPickDate"

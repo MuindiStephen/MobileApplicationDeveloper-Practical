@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.muindi.stephen.mobiledeveloperpractical.adapter.PatientListingAdapter
 import com.muindi.stephen.mobiledeveloperpractical.data.dto.responses.patients.RegisterPatientData
@@ -71,6 +72,11 @@ class PatientListingFragment : Fragment() {
     }
 
     private fun initBinding() {
+
+        binding.imageView11.setOnClickListener {
+            findNavController().navigateUp()
+        }
+
         binding.inputPickDate.setOnFocusChangeListener { v, hasFocus ->
             if (hasFocus) {
                 showDatePickerDialog()
