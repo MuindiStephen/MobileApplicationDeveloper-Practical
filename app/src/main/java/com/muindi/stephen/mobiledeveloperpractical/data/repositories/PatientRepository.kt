@@ -4,6 +4,8 @@ import com.muindi.stephen.mobiledeveloperpractical.data.local.room.AppLocalDatab
 import com.muindi.stephen.mobiledeveloperpractical.data.model.requests.auth.SignInRequest
 import com.muindi.stephen.mobiledeveloperpractical.data.model.requests.auth.SignUpRequest
 import com.muindi.stephen.mobiledeveloperpractical.data.model.requests.patients.PatientRegistrationRequest
+import com.muindi.stephen.mobiledeveloperpractical.data.model.requests.visits.VisitsGeneralAssessmentRequest
+import com.muindi.stephen.mobiledeveloperpractical.data.model.requests.visits.VisitsOverweightAssessmentRequest
 import com.muindi.stephen.mobiledeveloperpractical.data.model.requests.vitals.AddVitalRequest
 import com.muindi.stephen.mobiledeveloperpractical.data.remote.PatientsApiService
 import com.muindi.stephen.mobiledeveloperpractical.utils.apiRequestByResource
@@ -14,6 +16,9 @@ class PatientRepository @Inject constructor(
     appLocalDatabase: AppLocalDatabase
 ) {
     private val patientRegistrationDao = appLocalDatabase.patientRegistrationDao()
+    private val vitalsDao = appLocalDatabase.vitalDao()
+    private val visitsOverweightAssessmentInformationDao = appLocalDatabase.visitsOverweightAssessmentInformationDao()
+    private val visitsGeneralAssessmentInformationDao = appLocalDatabase.visitsGeneralAssessmentInformationDao()
 
 
     /**
@@ -51,11 +56,28 @@ class PatientRepository @Inject constructor(
     }
 
     suspend fun addVitalLocally(addVitalRequest: AddVitalRequest) = apiRequestByResource {
-        //patientRegistrationDao.insertPatient(patientRegistrationRequest)
+        vitalsDao.addVital(addVitalRequest = addVitalRequest)
     }
 
     /**
      * Visits
      */
+    // General Assessment information
+    suspend fun addGeneralAssessmentInfoRemotely(accessToken: String, visitsGeneralAssessmentRequest: VisitsGeneralAssessmentRequest ) = apiRequestByResource {
+        apiService.addGeneralAssessmentInformation(accessToken = accessToken, visitsGeneralAssessmentRequest = visitsGeneralAssessmentRequest)
+    }
+
+    suspend fun addGeneralAssessmentInfoLocally(visitsGeneralAssessmentRequest: VisitsGeneralAssessmentRequest) = apiRequestByResource {
+        visitsGeneralAssessmentInformationDao.insertGeneralAssessmentInformation(visitsGeneralAssessmentRequest = visitsGeneralAssessmentRequest)
+    }
+
+    // Overweight Assessment information
+    suspend fun addOverweightAssessmentInfoRemotely(accessToken: String, visitsOverweightAssessmentRequest: VisitsOverweightAssessmentRequest) = apiRequestByResource {
+        apiService.addOverweightAssessmentInformation(accessToken = accessToken, visitsOverweightAssessmentRequest = visitsOverweightAssessmentRequest)
+    }
+
+    suspend fun addOverweightAssessmentInfoLocally(visitsOverweightAssessmentRequest: VisitsOverweightAssessmentRequest) = apiRequestByResource {
+        visitsOverweightAssessmentInformationDao.insertOverweightAssessmentInformation(visitsOverweightAssessmentRequest)
+    }
 
 }
