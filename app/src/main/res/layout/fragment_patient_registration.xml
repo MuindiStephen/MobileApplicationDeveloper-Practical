@@ -14,7 +14,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginTop="100dp"
         android:elevation="10dp"
         android:hint="Enter patient number"
         app:boxCornerRadiusBottomEnd="10dp"
@@ -23,9 +22,10 @@
         app:boxCornerRadiusTopStart="10dp"
         app:boxStrokeWidthFocused="2dp"
         app:endIconMode="clear_text"
+        android:layout_marginTop="@dimen/_16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/textView3">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/inputPatientNumber"
@@ -219,6 +219,17 @@
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@+id/textViewUserName"
         app:layout_constraintTop_toBottomOf="@+id/textViewUserName" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Patient Registration"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/imageView3"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

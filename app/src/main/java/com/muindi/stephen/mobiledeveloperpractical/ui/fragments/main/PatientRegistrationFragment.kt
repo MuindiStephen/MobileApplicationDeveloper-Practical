@@ -1,10 +1,13 @@
 package com.muindi.stephen.mobiledeveloperpractical.ui.fragments.main
 
+import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -14,6 +17,7 @@ import androidx.navigation.fragment.findNavController
 import com.muindi.stephen.mobiledeveloperpractical.R
 import com.muindi.stephen.mobiledeveloperpractical.data.model.requests.patients.PatientRegistrationRequest
 import com.muindi.stephen.mobiledeveloperpractical.databinding.FragmentPatientRegistrationBinding
+import com.muindi.stephen.mobiledeveloperpractical.utils.PreferencesHelper
 import com.muindi.stephen.mobiledeveloperpractical.utils.ResourceNetwork
 import com.muindi.stephen.mobiledeveloperpractical.utils.displaySnackBar
 import com.muindi.stephen.mobiledeveloperpractical.utils.getToken
@@ -29,6 +33,8 @@ import java.util.Locale
 class PatientRegistrationFragment : Fragment() {
     private lateinit var binding: FragmentPatientRegistrationBinding
     private val viewModel: MainViewModel by viewModels()
+
+    private var onBackPressedCallback: OnBackPressedCallback? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,9 +52,27 @@ class PatientRegistrationFragment : Fragment() {
         return binding.root
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as AppCompatActivity).supportActionBar?.hide()
+
+        onBackPressedCallback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                exitDialog()
+            }
+        }
+
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner, onBackPressedCallback!!
+        )
+
+        val preferencesHelper = PreferencesHelper(requireContext())
+
+        val username = preferencesHelper.getUserName("name","")
+
+        binding.textViewUserName.text = "Hi, "+ username.toString()
+
 
         initBinding()
 
@@ -134,7 +158,9 @@ class PatientRegistrationFragment : Fragment() {
 
     private fun initBinding() {
 
-        binding.textViewUserName.text = ""
+        binding.buttonClose.setOnClickListener {
+            exitDialog()
+        }
 
         binding.inputRegDate.setOnFocusChangeListener { v, hasFocus ->
             if (hasFocus) {
@@ -223,4 +249,16 @@ class PatientRegistrationFragment : Fragment() {
 
         return valid
     }
+
+    fun exitDialog() {
+        val builder = AlertDialog.Builder(requireContext()).setTitle("Confirm Exit!")
+            .setMessage("Are you sure you want to exit the app?")
+            .setPositiveButton("Yes") { _, _ ->
+                requireActivity().finishAffinity()
+            }.setNegativeButton("Cancel") { dialog, _ ->
+                dialog.dismiss()
+            }.setIcon(android.R.drawable.ic_dialog_alert).setCancelable(false)
+        builder.show()
+    }
+
 }

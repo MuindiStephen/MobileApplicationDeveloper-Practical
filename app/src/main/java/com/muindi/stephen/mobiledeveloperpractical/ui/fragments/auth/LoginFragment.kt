@@ -110,6 +110,13 @@ class LoginFragment : Fragment() {
                             saveToken(context = requireContext(), token = accessToken)
                         }
 
+                        val loggedInUserName = apiResponse.data?.name.toString()
+
+                        val sharedPreferences = PreferencesHelper(requireContext())
+                        sharedPreferences.saveUserName("name",
+                            loggedInUserName.toString()
+                        )
+
                         displaySnackBar(message)
 
                         findNavController().navigate(

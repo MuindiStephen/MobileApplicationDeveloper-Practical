@@ -56,4 +56,13 @@ class PreferencesHelper  (context: Context) {
         spEditor.clear()
         spEditor.apply()
     }
+
+    fun saveUserName(spKey: String, value: String) {
+        spEditor.putString(spKey, value)
+        spEditor.apply()
+    }
+
+    fun getUserName(spKey: String, value: String): String? {
+        return sharedPreferences.getString(spKey, value)
+    }
 }

@@ -24,6 +24,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -85,6 +86,8 @@ class MainViewModel @Inject constructor(
         dob: String ,
         gender: String
     ) = viewModelScope.launch {
+        _addNewPatientRemoteState.value = ResourceNetwork.Loading
+
         _addNewPatientRemoteState.value = repository.registerNewPatientRemote(
            accessToken = accessToken,
             patientRegistrationRequest = PatientRegistrationRequest(
@@ -118,6 +121,10 @@ class MainViewModel @Inject constructor(
         visit_date:String,
         weight: String
     ) = viewModelScope.launch {
+
+        _addNewVitalRemoteState.value = ResourceNetwork.Loading
+
+
         _addNewVitalRemoteState.value = repository.addVitalRemotely(
             accessToken = accessToken,
             addVitalRequest = AddVitalRequest(
@@ -152,6 +159,9 @@ class MainViewModel @Inject constructor(
         vital_id : String,
         on_drugs: String
     ) = viewModelScope.launch {
+
+        _addNewGeneralAssessmentRemoteState.value = ResourceNetwork.Loading
+
         _addNewGeneralAssessmentRemoteState.value = repository.addGeneralAssessmentInfoRemotely(
             accessToken = accessToken,
             visitsGeneralAssessmentRequest = VisitsGeneralAssessmentRequest(
@@ -189,6 +199,9 @@ class MainViewModel @Inject constructor(
         vital_id : String,
         on_drugs: String
     ) = viewModelScope.launch {
+
+        _addNewOverweightAssessmentRemoteState.value = ResourceNetwork.Loading
+
         _addNewOverweightAssessmentRemoteState.value = repository.addOverweightAssessmentInfoRemotely(
             accessToken = accessToken,
             visitsOverweightAssessmentRequest = VisitsOverweightAssessmentRequest(
@@ -213,5 +226,23 @@ class MainViewModel @Inject constructor(
 
     fun resetSignInState() {
         _signInState.value = null
+    }
+
+
+
+    fun resetPatientRegistrationState() {
+       _addNewPatientRemoteState.value = null
+    }
+
+    fun resetVitalState() {
+        _addNewVitalRemoteState.value = null
+    }
+
+    fun resetGeneralAssessState() {
+        _addNewGeneralAssessmentRemoteState.value = null
+    }
+
+    fun resetOverWeightAssessState() {
+        _addNewOverweightAssessmentRemoteState.value = null
     }
 }
