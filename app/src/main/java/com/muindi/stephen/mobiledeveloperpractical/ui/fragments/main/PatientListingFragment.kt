@@ -55,7 +55,7 @@ class PatientListingFragment : Fragment() {
     private fun getAllPatientListing() {
         val accessToken = getToken(requireContext())
 
-        viewModel.fetchAllPatientListing(accessToken = accessToken!!).observe(viewLifecycleOwner) { response ->
+        viewModel.fetchAllPatientListing(accessToken = "Bearer $accessToken").observe(viewLifecycleOwner) { response ->
             if (response?.data.isNullOrEmpty()) {
                 displaySnackBar("No patients found")
             } else {
