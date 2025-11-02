@@ -20,8 +20,6 @@ import kotlin.properties.Delegates
 class SplashFragment : Fragment() {
 
     private lateinit var binding: FragmentSplashBinding
-    private var isOnboardingDone by Delegates.notNull<Boolean>()
-    private var ifFirstTimeLogin by Delegates.notNull<Boolean>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,38 +42,8 @@ class SplashFragment : Fragment() {
 
         lifecycleScope.launch {
             delay(2000L)
-            navigate()
-        }
-    }
-
-    private fun navigate() {
-        checkLoginHistory()
-    }
-
-    private fun checkLoginHistory() {
-        isOnboardingDone = PreferencesHelper(requireActivity()).getIfToShowOnAuthDashboard(
-            requireActivity()
-        )
-        if (isOnboardingDone) {
-            Log.e("Onboarding","FirstTimeLogin onboardings, $isOnboardingDone")
-
-            ifFirstTimeLogin = PreferencesHelper(requireContext()).getIfFirstTimeLogin(requireActivity())
-
-            if (!ifFirstTimeLogin) {
-                //go to register patient screen
-                findNavController().navigate(
-                    R.id.action_splashFragment_to_loginFragment
-                )
-
-            } else {
-                //navigate to login screen
-                findNavController().navigate(
-                    R.id.action_splashFragment_to_patientRegistrationFragment
-                )
-            }
-        } else {
-            Log.e("Onboarding","FirstTimeLogin accounts $isOnboardingDone")
             findNavController().navigate(R.id.action_splashFragment_to_authDashboardFragment)
         }
     }
+
 }

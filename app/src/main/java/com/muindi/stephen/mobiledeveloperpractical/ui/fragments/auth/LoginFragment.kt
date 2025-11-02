@@ -114,8 +114,6 @@ class LoginFragment : Fragment() {
                         findNavController().navigate(
                             R.id.action_loginFragment_to_patientRegistrationFragment
                         )
-
-                        PreferencesHelper(requireContext()).setIfFirstTimeLogin(requireActivity(),false)
                     }
                 }
             }

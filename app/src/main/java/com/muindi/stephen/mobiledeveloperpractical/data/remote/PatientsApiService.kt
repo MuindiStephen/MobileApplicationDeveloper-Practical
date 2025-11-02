@@ -30,7 +30,7 @@ interface PatientsApiService {
         @Body signUpRequest: SignUpRequest
     ) : SignUpApiGeneralResponse<SignUpData>
 
-    @POST("user/login")
+    @POST("user/signin")
     suspend fun signInUser(
         @Body signInRequest: SignInRequest
     ) : SignInApiGeneralResponse<SignInData>
