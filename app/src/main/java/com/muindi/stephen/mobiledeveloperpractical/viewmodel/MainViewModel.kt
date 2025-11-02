@@ -206,4 +206,12 @@ class MainViewModel @Inject constructor(
     fun fetchAllPatientListing(accessToken: String) : LiveData<RegisteredPatientsResponse> {
         return repository.fetchAllPatientListing(accessToken = accessToken)
     }
+
+    fun resetSignUpState() {
+        _signUpState.value = null
+    }
+
+    fun resetSignInState() {
+        _signInState.value = null
+    }
 }

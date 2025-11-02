@@ -115,6 +115,8 @@ class SignUpFragment : Fragment() {
 
                         displaySnackBar(signupMsg)
                         findNavController().navigate(R.id.action_signUpFragment_to_loginFragment)
+
+                        viewModel.resetSignUpState()
                     }
 
                     null -> {
