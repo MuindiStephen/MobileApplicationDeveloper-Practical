@@ -7,9 +7,14 @@ import com.muindi.stephen.mobiledeveloperpractical.data.dto.responses.auth.SignI
 import com.muindi.stephen.mobiledeveloperpractical.data.dto.responses.auth.SignUpApiGeneralResponse
 import com.muindi.stephen.mobiledeveloperpractical.data.dto.responses.auth.SignUpData
 import com.muindi.stephen.mobiledeveloperpractical.data.dto.responses.patients.PatientRegistrationResponse
+import com.muindi.stephen.mobiledeveloperpractical.data.dto.responses.visits.VisitsResponse
+import com.muindi.stephen.mobiledeveloperpractical.data.dto.responses.vitals.AddVitalResponse
 import com.muindi.stephen.mobiledeveloperpractical.data.model.requests.auth.SignInRequest
 import com.muindi.stephen.mobiledeveloperpractical.data.model.requests.auth.SignUpRequest
 import com.muindi.stephen.mobiledeveloperpractical.data.model.requests.patients.PatientRegistrationRequest
+import com.muindi.stephen.mobiledeveloperpractical.data.model.requests.visits.VisitsGeneralAssessmentRequest
+import com.muindi.stephen.mobiledeveloperpractical.data.model.requests.visits.VisitsOverweightAssessmentRequest
+import com.muindi.stephen.mobiledeveloperpractical.data.model.requests.vitals.AddVitalRequest
 import com.muindi.stephen.mobiledeveloperpractical.data.repositories.PatientRepository
 import com.muindi.stephen.mobiledeveloperpractical.utils.ResourceNetwork
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -82,6 +87,109 @@ class MainViewModel @Inject constructor(
                 lastname = lastname,
                 gender = gender,
                 dob = dob
+            )
+        )
+    }
+
+    // vitals
+    fun addANewVitalLocally(vitalRequest: AddVitalRequest) = viewModelScope.launch {
+        withContext(Dispatchers.IO) {
+            repository.addVitalLocally(addVitalRequest = vitalRequest)
+        }
+    }
+
+
+    // registering a new patient remotely/online
+    private var _addNewVitalRemoteState = MutableStateFlow<ResourceNetwork<AddVitalResponse>?>(null)
+    val addNewVitalRemoteState: StateFlow<ResourceNetwork<AddVitalResponse>?> get() = _addNewVitalRemoteState.asStateFlow()
+
+    fun addNewVitalRemotely(
+        accessToken: String,
+        bmi :String,
+        height: String,
+        patient_id: String,
+        visit_date:String,
+        weight: String
+    ) = viewModelScope.launch {
+        _addNewVitalRemoteState.value = repository.addVitalRemotely(
+            accessToken = accessToken,
+            addVitalRequest = AddVitalRequest(
+                bmi = bmi,
+                height = height,
+                patient_id = patient_id,
+                visit_date = visit_date,
+                weight = weight,
+            )
+        )
+    }
+
+    // General assessment info
+    fun addANewGeneralAssessmentInfoLocally(visitsGeneralAssessmentRequest: VisitsGeneralAssessmentRequest) = viewModelScope.launch {
+        withContext(Dispatchers.IO) {
+            repository.addGeneralAssessmentInfoLocally(visitsGeneralAssessmentRequest = visitsGeneralAssessmentRequest)
+        }
+    }
+
+
+    private var _addNewGeneralAssessmentRemoteState = MutableStateFlow<ResourceNetwork<VisitsResponse>?>(null)
+    val addNewGeneralAssessmentRemoteState: StateFlow<ResourceNetwork<VisitsResponse>?> get() = _addNewGeneralAssessmentRemoteState.asStateFlow()
+
+    fun addANewGeneralAssessmentInfoRemotely(
+        accessToken: String,
+        comments :String,
+        general_health: String,
+        on_diet: String,
+        patient_id: String,
+        visit_date: String,
+        vital_id : String,
+        on_drugs: String
+    ) = viewModelScope.launch {
+        _addNewGeneralAssessmentRemoteState.value = repository.addGeneralAssessmentInfoRemotely(
+            accessToken = accessToken,
+            visitsGeneralAssessmentRequest = VisitsGeneralAssessmentRequest(
+                comments = comments,
+                general_health = general_health,
+                on_diet = on_diet,
+                patient_id = patient_id,
+                visit_date = visit_date,
+                vital_id = vital_id,
+                on_drugs = on_drugs
+            )
+        )
+    }
+
+
+    // overweight assessment info
+    fun addANewOverweightAssessmentInfoLocally(visitsOverweightAssessmentRequest: VisitsOverweightAssessmentRequest) = viewModelScope.launch {
+        withContext(Dispatchers.IO) {
+            repository.addOverweightAssessmentInfoLocally(visitsOverweightAssessmentRequest = visitsOverweightAssessmentRequest)
+        }
+    }
+
+
+    private var _addNewOverweightAssessmentRemoteState = MutableStateFlow<ResourceNetwork<VisitsResponse>?>(null)
+    val addNewOverweightAssessmentRemoteState: StateFlow<ResourceNetwork<VisitsResponse>?> get() = _addNewOverweightAssessmentRemoteState.asStateFlow()
+
+    fun addANewOverweightAssessmentInfoRemotely(
+        accessToken: String,
+        comments :String,
+        general_health: String,
+        on_diet: String,
+        patient_id: String,
+        visit_date: String,
+        vital_id : String,
+        on_drugs: String
+    ) = viewModelScope.launch {
+        _addNewOverweightAssessmentRemoteState.value = repository.addOverweightAssessmentInfoRemotely(
+            accessToken = accessToken,
+            visitsOverweightAssessmentRequest = VisitsOverweightAssessmentRequest(
+                comments = comments,
+                general_health = general_health,
+                on_diet = on_diet,
+                patient_id = patient_id,
+                visit_date = visit_date,
+                vital_id = vital_id,
+                on_drugs = on_drugs
             )
         )
     }

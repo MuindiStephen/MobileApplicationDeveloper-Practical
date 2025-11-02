@@ -6,6 +6,7 @@ import com.muindi.stephen.mobiledeveloperpractical.data.model.requests.auth.Sign
 import com.muindi.stephen.mobiledeveloperpractical.data.dto.responses.auth.SignUpApiGeneralResponse
 import com.muindi.stephen.mobiledeveloperpractical.data.dto.responses.auth.SignUpData
 import com.muindi.stephen.mobiledeveloperpractical.data.dto.responses.patients.PatientRegistrationResponse
+import com.muindi.stephen.mobiledeveloperpractical.data.dto.responses.visits.VisitsResponse
 import com.muindi.stephen.mobiledeveloperpractical.data.model.requests.auth.SignInRequest
 import com.muindi.stephen.mobiledeveloperpractical.data.model.requests.patients.PatientRegistrationRequest
 import com.muindi.stephen.mobiledeveloperpractical.data.model.requests.patients.RegisterPatientData
@@ -72,12 +73,12 @@ interface PatientsApiService {
     suspend fun addGeneralAssessmentInformation(
         @Header("Authorization") accessToken: String,
         @Body visitsGeneralAssessmentRequest: VisitsGeneralAssessmentRequest
-    )
+    ): VisitsResponse
 
     @POST("visits/add")
     suspend fun addOverweightAssessmentInformation(
         @Header("Authorization") accessToken: String,
         @Body visitsOverweightAssessmentRequest: VisitsOverweightAssessmentRequest
-    )
+    ): VisitsResponse
 
 }
