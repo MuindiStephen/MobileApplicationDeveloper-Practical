@@ -2,6 +2,7 @@ package com.muindi.stephen.mobiledeveloperpractical.di
 
 
 import com.muindi.stephen.mobiledeveloperpractical.data.remote.PatientsApiService
+import com.muindi.stephen.mobiledeveloperpractical.utils.Constants
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -56,7 +57,7 @@ object NetworkModule {
         converter: Converter.Factory
     ): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://patientvisitapis.intellisoftkenya.com/api/")
+            .baseUrl(Constants.getStringBaseUrlDevelopment())
             .client(okHttpClient)
             .addConverterFactory(converter)
             .build()
