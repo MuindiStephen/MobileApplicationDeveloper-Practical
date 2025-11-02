@@ -143,6 +143,8 @@ class PatientRegistrationFragment : Fragment() {
                         if (proceed == 0) {
                             displaySnackBar(msg)
                             findNavController().navigate(R.id.action_patientRegistrationFragment_to_vitalsFormFragment)
+
+                            viewModel.resetPatientRegistrationState()
                         } else if (proceed == 1) {
                             displaySnackBar(msg ?: "Failed to register patient")
                         }

@@ -113,6 +113,8 @@ class VitalsFormFragment : Fragment() {
                         if (msg == "Vital Added Successfully") {
                             displaySnackBar(msg)
 
+                            viewModel.resetVitalState()
+
                             //navigate either to general or overweight screens
                             //BMI comparison with 25
                             val bmi = binding.inputBMI.text.toString().toDoubleOrNull() ?: 0.0

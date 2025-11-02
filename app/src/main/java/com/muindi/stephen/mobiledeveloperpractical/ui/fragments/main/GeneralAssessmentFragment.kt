@@ -164,6 +164,8 @@ class GeneralAssessmentFragment : Fragment() {
                         if (msg == "Visit Added Successfully") {
                             displaySnackBar(msg)
 
+                            viewModel.resetGeneralAssessState()
+
                             findNavController().navigate(
                                 R.id.action_generalAssessmentFragment_to_patientListingFragment
                             )

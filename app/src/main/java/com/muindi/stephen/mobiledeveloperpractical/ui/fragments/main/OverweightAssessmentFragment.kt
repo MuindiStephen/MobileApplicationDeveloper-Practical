@@ -163,6 +163,8 @@ class OverweightAssessmentFragment : Fragment() {
                         if (msg == "Visit Added Successfully") {
                             displaySnackBar(msg)
 
+                            viewModel.resetOverWeightAssessState()
+
                             findNavController().navigate(
                                 R.id.action_overweightAssessmentFragment_to_patientListingFragment
                             )
