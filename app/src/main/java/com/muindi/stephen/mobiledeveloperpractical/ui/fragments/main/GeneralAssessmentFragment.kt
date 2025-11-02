@@ -69,7 +69,7 @@ class GeneralAssessmentFragment : Fragment() {
                     on_diet = selectedOnDiet,
                     patient_id = binding.inputPatientName.text.toString().trim(),
                     visit_date = binding.inputVisitDate.text.toString().trim(),
-                    vital_id = UUID.randomUUID().toString(),
+                    vital_id = "10",
                     on_drugs = "null",
                     comments = binding.inputComments.text.toString().trim()
                 )
@@ -82,7 +82,7 @@ class GeneralAssessmentFragment : Fragment() {
                             on_diet = selectedOnDiet,
                             patient_id = binding.inputPatientName.text.toString().trim(),
                             visit_date = binding.inputVisitDate.text.toString().trim(),
-                            vital_id = UUID.randomUUID().toString(),
+                            vital_id = "10",
                             on_drugs = "null",
                             comments = binding.inputComments.text.toString().trim()
                         )
